@@ -2,8 +2,6 @@ class Printer
   def initialize(filename)
     @file_data = File.open(filename).readlines.map(&:chomp)
     @output_info = prepend
-
-    binding.pry
   end
 
   def print
@@ -15,7 +13,7 @@ class Printer
         f.puts(inner_array)
       end
 
-      puts "Finished batch #{index + 1} at filepath: #{output_filename}"
+      puts "Finished batch #{index + 1}"
     end
   end
 
@@ -44,7 +42,7 @@ class Printer
 
   def prepend
     @file_data.map do |account_num|
-      account_num.strip! if account_num.include?(' ')
+      account_num.strip! if account_num.include?(' ') || account_num.include?("\t")
       "Account:#{account_num}"
     end
   end
