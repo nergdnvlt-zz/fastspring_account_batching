@@ -2,6 +2,8 @@ class Printer
   def initialize(filename)
     @file_data = File.open(filename).readlines.map(&:chomp)
     @output_info = prepend
+
+    binding.pry
   end
 
   def print
@@ -42,6 +44,7 @@ class Printer
 
   def prepend
     @file_data.map do |account_num|
+      account_num.strip! if account_num.include?(' ')
       "Account:#{account_num}"
     end
   end
